@@ -40,6 +40,7 @@ tar -xvzf $SRC_DATASTACK_LOCATION -C $DATASTACK_DIR
 # run the model
 WORKSPACE_DIR="$L_SCRATCH/$INVEST_MODELNAME"
 singularity run \
+        --env GDAL_CACHEMAX=128 \
         docker://ghcr.io/natcap/invest:$INVEST_VERSION \
         python -m natcap.invest run "$INVEST_MODELNAME" \
         --datastack $DATASTACK_DIR/parameters.invest.json \
