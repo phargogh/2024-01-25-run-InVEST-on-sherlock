@@ -56,24 +56,29 @@ echo "Done!"
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--invest_version', default="3.14.1", help=(
+        "An InVEST version, at least 3.14.1."))
+    parser.add_argument('modelname', help=(
+        "The name of the InVEST model to run"))
+    parser.add_argument('source_datastack', help=(
+        "The location of the source datastack archive"))
+    parser.add_argument('oak_location', help=(
+        'Where the output workspace should be copied onto Oak after '
+        'the job completes.'))
 
-    # job name - make it related to the model name
-    # whether to use sbatch or srun
-
-    invest_version = '3.14.1'
-    oak_location = '/oak/stanford/groups/gdaily/users/jadoug06/test'
-    invest_modelname = 'carbon'
-    src_datastack_location = '/home/jadoug06/carbon-inputs.tar.gz'
+    args = parser.parse_args()
 
     sbatch_filename = os.path.join(os.environ['SCRATCH'],
-                                   f'InVEST-{invest_modelname}-{NOW}.sbatch')
+                                   f'InVEST-{args.modelname}-{NOW}.sbatch')
     with open(sbatch_filename, 'w') as sbatch_file:
         sbatch_file.write(SBATCH_SCRIPT)
 
     LOGGER.info("Submitting batch job")
-    subprocess.call(['sbatch', sbatch_filename, invest_version,
-                     invest_modelname, src_datastack_location, oak_location])
+    subprocess.call(['sbatch', sbatch_filename, args.invest_version,
+                     args.modelname, args.source_datastack, args.oak_location])
     LOGGER.info(f"Check on your job status with `squeue -u {USERNAME}`")
+    LOGGER.info("  Alternatively, view your jobs with Sherlock OnDemand at ")
+    LOGGER.info("  https://ondemand.sherlock.stanford.edu/pun/sys/dashboard/activejobs")
 
 
 if __name__ == '__main__':
