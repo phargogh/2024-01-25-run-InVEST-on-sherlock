@@ -67,7 +67,7 @@ def main():
 
     sbatch_filename = os.path.join(os.environ['SCRATCH'],
                                    f'InVEST-{invest_modelname}-{NOW}.sbatch')
-    with open(sbatch_filename, 'rw') as sbatch_file:
+    with open(sbatch_filename, 'w') as sbatch_file:
         sbatch_file.write(SBATCH_SCRIPT)
 
     LOGGER.info("Submitting batch job")
