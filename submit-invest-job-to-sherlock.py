@@ -50,6 +50,7 @@ echo "Copying workspace to $TARGET_OAK_LOCATION"
 cp -rv $WORKSPACE_DIR $TARGET_OAK_LOCATION
 
 echo "Done!"
+
 """
 
 
@@ -59,7 +60,7 @@ def main():
     # job name - make it related to the model name
     # whether to use sbatch or srun
 
-    invest_version = '3.14.1
+    invest_version = '3.14.1'
     oak_location = '/oak/stanford/groups/gdaily/users/jadoug06/test'
     invest_modelname = 'carbon'
     src_datastack_location = '/home/jadoug06/carbon-inputs.tar.gz'
@@ -73,6 +74,7 @@ def main():
     subprocess.call(['sbatch', sbatch_filename, invest_version,
                      invest_modelname, src_datastack_location, oak_location])
     LOGGER.info(f"Check on your job status with `squeue -u {USERNAME}`")
+
 
 if __name__ == '__main__':
     main()
