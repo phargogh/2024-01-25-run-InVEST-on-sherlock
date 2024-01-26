@@ -89,7 +89,8 @@ def main():
     subprocess.call(['sbatch', f"--time={args.runtime}",
                      f"--cpus-per-task={n_cpus}", sbatch_filename,
                      args.invest_version, args.modelname,
-                     args.source_datastack, args.oak_location, args.n_workers])
+                     args.source_datastack, args.oak_location,
+                     str(args.n_workers)])
     LOGGER.info(f"Check on your job status with `squeue -u {USERNAME}`")
     LOGGER.info("  Alternatively, view your jobs with Sherlock OnDemand at ")
     LOGGER.info("  https://ondemand.sherlock.stanford.edu/pun/sys/dashboard/activejobs")
