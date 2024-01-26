@@ -56,7 +56,8 @@ echo "Done!"
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=(
+        "Submit an InVEST job to Sherlock."))
     parser.add_argument('--invest_version', default="3.14.1", help=(
         "An InVEST version, at least 3.14.1."))
     parser.add_argument('modelname', help=(
